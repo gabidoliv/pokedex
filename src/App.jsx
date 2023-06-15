@@ -64,6 +64,9 @@ function App() {
         const typeName = firstType.type.name;
         return (
           <div style={{ backgroundColor: colorPerType[typeName] }}>
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+            />
             <h2>{pokemon.name}</h2>
             {pokemon.types.map(({ type }) => (
               <h3>{type.name}</h3>
