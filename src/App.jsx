@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { Card } from "./components/Card/Card";
 
 const colorPerType = {
   normal: "#A8A878",
@@ -24,6 +25,7 @@ const colorPerType = {
 
 function App() {
   const [pokemon, setPokemon] = useState();
+  const [counter, setCounter] = useState(0);
 
   const fetchPokemon = async () => {
     // fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
@@ -58,6 +60,7 @@ function App() {
   return (
     <div className="App">
       <h1>Pokedex</h1>
+      <Card />
       {pokemon?.map((pokemon) => {
         // It will show only the color related to the first type
         const [firstType] = pokemon.types;
@@ -67,6 +70,7 @@ function App() {
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
             />
+            <button onClick={() => setCounter((old) => old+1)}>numero: {counter}</button>
             <h2>{pokemon.name}</h2>
             {pokemon.types.map(({ type }) => (
               <h3>{type.name}</h3>
