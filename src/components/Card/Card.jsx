@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const colorPerType = {
   normal: "#A8A878",
   fighting: "#C03028",
@@ -21,10 +19,10 @@ const colorPerType = {
   fairy: "#EE99AC",
 };
 
+const parseIdIntoPokedexNumber = (id) => `#${id.toString().padStart(3, "0")}`;
+
 export const Card = (props) => {
   const { pokemon } = props;
-
-  const [counter, setCounter] = useState(0);
 
   // It will show only the color related to the first type
   const [firstType] = pokemon.types;
@@ -35,13 +33,19 @@ export const Card = (props) => {
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
       />
-      <button onClick={() => setCounter((old) => old + 1)}>
-        numero: {counter}
-      </button>
+      <h3>{parseIdIntoPokedexNumber(pokemon.id)}</h3>
       <h2>{pokemon.name}</h2>
-      {pokemon.types.map(({ type }) => (
-        <h3>{type.name}</h3>
-      ))}
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {pokemon.types.map(({ type }) => (
+          <h3>{type.name}</h3>
+        ))}
+      </div>
     </div>
   );
 };
