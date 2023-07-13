@@ -29,23 +29,36 @@ export const Card = (props) => {
   const typeName = firstType.type.name;
 
   return (
-    <div style={{ backgroundColor: colorPerType[typeName] }}>
+    <div
+      style={{
+        backgroundColor: colorPerType[typeName],
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: 16,
+        marginBottom: 16,
+        borderRadius: 15,
+      }}
+    >
+      <div>
+        <h3>{parseIdIntoPokedexNumber(pokemon.id)}</h3>
+        <h2>{pokemon.name}</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {pokemon.types.map(({ type }) => (
+            <h3>{type.name}</h3>
+          ))}
+        </div>
+      </div>
+
       <img
+        style={{ height: 256 }}
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
       />
-      <h3>{parseIdIntoPokedexNumber(pokemon.id)}</h3>
-      <h2>{pokemon.name}</h2>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        {pokemon.types.map(({ type }) => (
-          <h3>{type.name}</h3>
-        ))}
-      </div>
     </div>
   );
 };
