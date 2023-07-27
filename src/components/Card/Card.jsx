@@ -1,3 +1,5 @@
+import { Tag } from "../Tag/Tag";
+
 const colorPerType = {
   normal: "#A8A878",
   fighting: "#C03028",
@@ -50,7 +52,7 @@ export const Card = (props) => {
           }}
         >
           {pokemon.types.map(({ type }) => (
-            <h3>{type.name}</h3>
+              <Tag text={type.name} />
           ))}
         </div>
       </div>
