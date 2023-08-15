@@ -29,11 +29,12 @@ export const Card = (props) => {
   // It will show only the color related to the first type
   const [firstType] = pokemon.types;
   const typeName = firstType.type.name;
+  const color = colorPerType[typeName];
 
   return (
     <div
       style={{
-        backgroundColor: colorPerType[typeName],
+        backgroundColor: color,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -52,7 +53,7 @@ export const Card = (props) => {
           }}
         >
           {pokemon.types.map(({ type }) => (
-              <Tag text={type.name} />
+            <Tag text={type.name} color={color} />
           ))}
         </div>
       </div>
