@@ -1,27 +1,7 @@
+import { POKEMON_COLOR_PER_TYPE } from "../../constants/pokemon";
+import { parseIdIntoPokedexNumber } from "../../helpers/pokemon";
+import { toCapitalLetter } from "../../helpers/string";
 import { Tag } from "../Tag/Tag";
-
-const colorPerType = {
-  normal: "#A8A878",
-  fighting: "#C03028",
-  flying: "#A890F0",
-  poison: "#A040A0",
-  ground: "#E0C068",
-  rock: "#B8A038",
-  bug: "#A8B820",
-  ghost: "#705898",
-  steel: "#B8B8D0",
-  fire: "#FA6C6C",
-  water: "#6890F0",
-  grass: "#48CFB2",
-  electric: "#FFCE4B",
-  psychic: "#F85888",
-  ice: "#98D8D8",
-  dragon: "#7038F8",
-  dark: "#705848",
-  fairy: "#EE99AC",
-};
-
-const parseIdIntoPokedexNumber = (id) => `#${id.toString().padStart(3, "0")}`;
 
 export const Card = (props) => {
   const { pokemon } = props;
@@ -29,7 +9,7 @@ export const Card = (props) => {
   // It will show only the color related to the first type
   const [firstType] = pokemon.types;
   const typeName = firstType.type.name;
-  const color = colorPerType[typeName];
+  const color = POKEMON_COLOR_PER_TYPE[typeName];
 
   return (
     <div
@@ -45,7 +25,7 @@ export const Card = (props) => {
     >
       <div>
         <h3>{parseIdIntoPokedexNumber(pokemon.id)}</h3>
-        <h2>{pokemon.name}</h2>
+        <h2>{toCapitalLetter(pokemon.name)}</h2>
         <div
           style={{
             display: "flex",
@@ -53,7 +33,7 @@ export const Card = (props) => {
           }}
         >
           {pokemon.types.map(({ type }) => (
-            <Tag text={type.name} color={color} />
+            <Tag key={type.name} text={toCapitalLetter(type.name)} color={color} />
           ))}
         </div>
       </div>
