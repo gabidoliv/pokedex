@@ -37,7 +37,25 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Pokedex</h1>
+      <h1>Pokédex</h1>
+      <h3>Search for Pokémon by name.</h3>
+      <input
+        style={{
+          width: "100%",
+          border: "none",
+          backgroundColor: "#F2F2F2",
+          borderRadius: 24,
+          padding: "16px 0px",
+          marginBottom: 32,
+        }}
+        type="text"
+        name="input"
+        placeholder="What Pokémon are you looking for?"
+        onChange={(event) => {
+          const newValue = event.target.value;
+          console.log(newValue);
+        }}
+      />
       {pokemonList?.map((pokemon) => (
         <Card key={pokemon.id} pokemon={pokemon} />
       ))}
