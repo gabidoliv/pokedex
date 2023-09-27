@@ -4,6 +4,7 @@ import { Card } from "./components/Card/Card";
 
 function App() {
   const [pokemonList, setPokemonList] = useState();
+  const [filteredPokemonList, setFilteredPokemonList] = useState();
 
   const fetchPokemon = async () => {
     // fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
@@ -27,8 +28,9 @@ function App() {
     // Faz request de cada uma das promises e salva o resultado na variavel pokemonDetailedList
     const pokemonDetailedList = await Promise.all(promiseRequests);
 
-    // Atualiza o estado dos pokemon
+    // Atualiza os estados dos pokemon
     setPokemonList(pokemonDetailedList);
+    setFilteredPokemonList(pokemonDetailedList);
   };
 
   useEffect(() => {
@@ -53,10 +55,20 @@ function App() {
         placeholder="What Pokémon are you looking for?"
         onChange={(event) => {
           const newValue = event.target.value;
-          console.log(newValue);
+
+          if (!newValue) {
+            setFilteredPokemonList(pokemonList);
+            return;
+          }
+
+          const result = pokemonList.filter((pokemon) =>
+            pokemon.name.includes(newValue)
+          );
+
+          setFilteredPokemonList(result);
         }}
       />
-      {pokemonList?.map((pokemon) => (
+      {filteredPokemonList?.map((pokemon) => (
         <Card key={pokemon.id} pokemon={pokemon} />
       ))}
     </div>
