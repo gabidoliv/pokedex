@@ -3,7 +3,12 @@ import "./App.css";
 import { Card } from "./components/Card/Card";
 
 function App() {
+  // O estado pokemonList é nosso source of truth dos pokemon
+  // Então quando o usuario deletar o filtro, o setFilteredPokemonList se baseará neste source of truth (pokemonList) para retornar a lista ao estado inicial
   const [pokemonList, setPokemonList] = useState();
+
+  // O estado filteredPokemonList armazena os pokemon que contemplam o filtro atual do usuário. Caso não tenha filtro, este estado armazena todos os pokemon da source of truth
+  // Então quando o usuário digitar algum filtro, este estado vai ser atualizado
   const [filteredPokemonList, setFilteredPokemonList] = useState();
 
   const fetchPokemon = async () => {
@@ -29,7 +34,10 @@ function App() {
     const pokemonDetailedList = await Promise.all(promiseRequests);
 
     // Atualiza os estados dos pokemon
+    // Inicia o estado pokemonList com todos os pokemon que foram retornados pelo request `fetch(pokemon.url);`
     setPokemonList(pokemonDetailedList);
+
+    // Inicia o estado filteredPokemonList com todos os pokemon que foram retornados pelo request `fetch(pokemon.url);`
     setFilteredPokemonList(pokemonDetailedList);
   };
 
@@ -56,15 +64,17 @@ function App() {
         onChange={(event) => {
           const newValue = event.target.value;
 
+          // Quando não existe filtro (new value vazio), o estado filteredPokemonList tem que retornar a lista ao estado inicial (source of truth: pokemonList)
           if (!newValue) {
             setFilteredPokemonList(pokemonList);
             return;
           }
-
+          // O result recebe o array filtrado com os pokemon que correspondem ao que o usuario digitou no filtro
           const result = pokemonList.filter((pokemon) =>
             pokemon.name.includes(newValue)
           );
-
+          
+          // Atualiza o estado para re-renderizar a tela e ver a lista dos pokemon com o filtro aplicado em tempo real
           setFilteredPokemonList(result);
         }}
       />
