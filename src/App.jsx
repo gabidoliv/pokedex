@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Card } from "./components/Card/Card";
+import { Input } from "./components/Input/Input";
 
 function App() {
   // O estado pokemonList é nosso source of truth dos pokemon
@@ -45,40 +46,29 @@ function App() {
     fetchPokemon();
   }, []);
 
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+
+    // Quando não existe filtro (new value vazio), o estado filteredPokemonList tem que retornar a lista ao estado inicial (source of truth: pokemonList)
+    if (!newValue) {
+      setFilteredPokemonList(pokemonList);
+      return;
+    }
+    // O result recebe o array filtrado com os pokemon que correspondem ao que o usuario digitou no filtro
+    const result = pokemonList.filter((pokemon) =>
+      pokemon.name.includes(newValue)
+    );
+
+    // Atualiza o estado para re-renderizar a tela e ver a lista dos pokemon com o filtro aplicado em tempo real
+    setFilteredPokemonList(result);
+  };
+
   return (
     <div className="App">
       <h1>Pokédex</h1>
       <h3>Search for Pokémon by name.</h3>
-      <input
-        style={{
-          width: "100%",
-          border: "none",
-          backgroundColor: "#F2F2F2",
-          borderRadius: 24,
-          padding: "16px 0px",
-          marginBottom: 32,
-        }}
-        type="text"
-        name="input"
-        placeholder="What Pokémon are you looking for?"
-        onChange={(event) => {
-          const newValue = event.target.value;
-
-          // Quando não existe filtro (new value vazio), o estado filteredPokemonList tem que retornar a lista ao estado inicial (source of truth: pokemonList)
-          if (!newValue) {
-            setFilteredPokemonList(pokemonList);
-            return;
-          }
-          // O result recebe o array filtrado com os pokemon que correspondem ao que o usuario digitou no filtro
-          const result = pokemonList.filter((pokemon) =>
-            pokemon.name.includes(newValue)
-          );
-          
-          // Atualiza o estado para re-renderizar a tela e ver a lista dos pokemon com o filtro aplicado em tempo real
-          setFilteredPokemonList(result);
-        }}
-      />
-      {filteredPokemonList?.map((pokemon) => (
+      <Input handleChange={handleChange}/>
+     {filteredPokemonList?.map((pokemon) => (
         <Card key={pokemon.id} pokemon={pokemon} />
       ))}
     </div>
