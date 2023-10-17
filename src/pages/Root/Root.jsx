@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import { Card } from "./components/Card/Card";
-import { Input } from "./components/Input/Input";
+import "./Root.css";
+import { Card } from "../../components/Card/Card";
+import { Input } from "../../components/Input/Input";
 
-function App() {
+function Root() {
   // O estado pokemonList é nosso source of truth dos pokemon
   // Então quando o usuario deletar o filtro, o setFilteredPokemonList se baseará neste source of truth (pokemonList) para retornar a lista ao estado inicial
   const [pokemonList, setPokemonList] = useState();
@@ -67,12 +67,15 @@ function App() {
     <div className="App">
       <h1>Pokédex</h1>
       <h3>Search for Pokémon by name.</h3>
-      <Input handleChange={handleChange}/>
-     {filteredPokemonList?.map((pokemon) => (
+      <Input
+        placeholder="What Pokémon are you looking for?"
+        onChange={handleChange}
+      />
+      {filteredPokemonList?.map((pokemon) => (
         <Card key={pokemon.id} pokemon={pokemon} />
       ))}
     </div>
   );
 }
 
-export default App;
+export default Root;

@@ -1,5 +1,5 @@
 export const Input = (props) => {
-  const { handleChange } = props;
+  const { onChange, placeholder } = props;
 
   return (
     <div style={{ display: "flex", flex: 1 }}>
@@ -14,8 +14,8 @@ export const Input = (props) => {
         }}
         type="text"
         name="input"
-        placeholder="What Pokémon are you looking for?"
-        onChange={handleChange}
+        placeholder={placeholder}
+        onChange={onChange}
       />
     </div>
   );
