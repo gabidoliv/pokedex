@@ -33,7 +33,11 @@ export const Card = (props) => {
           }}
         >
           {pokemon.types.map(({ type }) => (
-            <Tag key={type.name} text={toCapitalLetter(type.name)} color={color} />
+            <Tag
+              key={type.name}
+              text={toCapitalLetter(type.name)}
+              color={color}
+            />
           ))}
         </div>
       </div>

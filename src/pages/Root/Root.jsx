@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Root.css";
 import { Card } from "../../components/Card/Card";
 import { Input } from "../../components/Input/Input";
+import { Link } from "react-router-dom";
 
 function Root() {
   // O estado pokemonList é nosso source of truth dos pokemon
@@ -72,7 +73,9 @@ function Root() {
         onChange={handleChange}
       />
       {filteredPokemonList?.map((pokemon) => (
-        <Card key={pokemon.id} pokemon={pokemon} />
+        <Link to={`/pokemon/${pokemon.id}`}>
+          <Card key={pokemon.id} pokemon={pokemon} />
+        </Link>
       ))}
     </div>
   );
