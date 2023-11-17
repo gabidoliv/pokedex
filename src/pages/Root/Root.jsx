@@ -65,7 +65,7 @@ function Root() {
   };
 
   return (
-    <div className="App">
+    <div>
       <h1>Pokédex</h1>
       <h3>Search for Pokémon by name.</h3>
       <Input
