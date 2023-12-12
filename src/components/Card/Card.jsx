@@ -1,15 +1,12 @@
 import { POKEMON_COLOR_PER_TYPE } from "../../constants/pokemon";
-import { parseIdIntoPokedexNumber } from "../../helpers/pokemon";
+import { getPokemonColorByType, parseIdIntoPokedexNumber } from "../../helpers/pokemon";
 import { toCapitalLetter } from "../../helpers/string";
 import { Tag } from "../Tag/Tag";
 
 export const Card = (props) => {
   const { pokemon } = props;
 
-  // It will show only the color related to the first type
-  const [firstType] = pokemon.types;
-  const typeName = firstType.type.name;
-  const color = POKEMON_COLOR_PER_TYPE[typeName];
+  const color = getPokemonColorByType(pokemon.types);
 
   return (
     <div

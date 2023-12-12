@@ -4,3 +4,16 @@
   padding: 2rem;
   text-align: center;
 }
+
+.stats {
+  height: 5px;
+  border-radius: 35px;
+  &::-webkit-progress-value {
+    background-color: var(--color);
+    border-radius: 5px;
+  }
+  &::-webkit-progress-bar {
+    background-color: #efefef;
+    border-radius: 5px;
+  }
+}
