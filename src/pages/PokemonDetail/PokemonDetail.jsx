@@ -35,14 +35,12 @@ export const PokemonDetail = (props) => {
 
   const color = getPokemonColorByType(pokemonSelected.types);
 
-  const name = parseStats(pokemonSelected.stats) ? Object.keys(parseStats(pokemonSelected.stats)) : [];
-
   return (
     <div>
       {pokemonSelected && <Card pokemon={pokemonSelected} />}
       <h3>Base Stats</h3>
 
-      <PokemonStatInfo statHP={baseStats.hp} statOther={[baseStats.attack,baseStats.defense,baseStats.specialAttack,baseStats.specialDefense,baseStats.speed]} statColor={color} name={name}/>
+      <PokemonStatInfo stats={baseStats} color={color}/>
 
       <h5 className="baseStatLabel">Total</h5>
     </div>

@@ -29,20 +29,38 @@ export const calculateMinOtherStats = (base) => {
 
 export const parseStats = (stats) => {
   const translateStatToCamelCase = {
-    hp: 'hp',
-    attack: 'attack',
-    defense: 'defense',
-    'special-attack': 'specialAttack',
-    'special-defense': 'specialDefense',
-    speed: 'speed',
+      hp: {
+          jsText: 'hp',
+          htmlName: 'HP'
+      },
+      attack: {
+          jsText: 'attack',
+          htmlName: 'Attack'
+      },
+      defense: {
+          jsText: 'defense',
+          htmlName: 'Defense'
+      },
+      'special-attack': {
+          jsText: 'specialAttack',
+          htmlName: 'Special Attack'
+      },
+      'special-defense': {
+          jsText: 'specialDefense',
+          htmlName: 'Special Defense'
+      },
+      speed: {
+          jsText: 'speed',
+          htmlName: 'Speed'
+      },
   };
 
   return stats.reduce((acc, cur) => {
-    const { base_stat, stat } = cur;
+      const { base_stat, stat } = cur;
 
-    const statName = translateStatToCamelCase[stat.name];
+      const { jsText: statName, htmlName } = translateStatToCamelCase[stat.name];
 
-    return { ...acc, [statName]: base_stat };
+      return { ...acc, [statName]: { base_stat, htmlName } };
   }, {});
 };
 

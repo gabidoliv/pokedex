@@ -6,38 +6,41 @@ import {
 } from '../../helpers/pokemon';
 
 export const PokemonStatInfo = (props) => {
-  const { statHP, statOther, statColor, name } = props;
+  const { stats, color } = props;
+  const keys = Object.keys(stats);
+  const { htmlName: hpHtmlName, base_stat: hpBaseStatValue } = stats['hp'];
+  const otherBaseStatValue = keys.filter(key => key !== 'hp').map(key => stats[key]);
 
   return (
       <div>
         <div>
-        <h5 className="baseStatLabel">HP {name}</h5>
-        <h5 className="baseStatLabel">{statHP}</h5>
+        <h5 className="baseStatLabel">{hpHtmlName}</h5>
+        <h5 className="baseStatLabel">{hpBaseStatValue}</h5>
         <progress
-          style={{ '--color': statColor }}
+          style={{ '--color': color }}
           class="stats"
-          value={statHP}
-          max={calculateMaxHp(statHP)}
+          value={hpBaseStatValue}
+          max={calculateMaxHp(hpBaseStatValue)}
         />
-        <h5 className="baseStatLabel">{calculateMinHp(statHP)}</h5>    
-        <h5 className="baseStatLabel">{calculateMaxHp(statHP)}</h5>
+        <h5 className="baseStatLabel">{calculateMinHp(hpBaseStatValue)}</h5>    
+        <h5 className="baseStatLabel">{calculateMaxHp(hpBaseStatValue)}</h5>
       </div>
 
-      {statOther.map((stat) => (
+      {otherBaseStatValue.map(({ htmlName: displayName, base_stat: otherBaseStatValue }) => (
         <div>
-          <h5 className="baseStatLabel">Titulo</h5>
-          <h5 className="baseStatLabel">{stat}</h5>
+          <h5 className="baseStatLabel">{displayName}</h5>
+          <h5 className="baseStatLabel">{otherBaseStatValue}</h5>
           <progress
-            style={{ '--color': statColor }}
+            style={{ '--color': color }}
             class="stats"
-            value={stat}
-            max={calculateMaxOtherStats(stat)}
+            value={otherBaseStatValue}
+            max={calculateMaxOtherStats(otherBaseStatValue)}
           />
           <h5 className="baseStatLabel">
-            {calculateMinOtherStats(stat)}
+            {calculateMinOtherStats(otherBaseStatValue)}
           </h5>
           <h5 className="baseStatLabel">
-            {calculateMaxOtherStats(stat)}
+            {calculateMaxOtherStats(otherBaseStatValue)}
           </h5>
         </div>
       ))}
