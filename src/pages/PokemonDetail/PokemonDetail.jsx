@@ -9,7 +9,7 @@ import {
   getPokemonColorByType,
   parseStats,
 } from '../../helpers/pokemon';
-import { PokemonStatInfo } from '../../components/PokemonStatInfo/PokemonStatInfo';
+import { PokemonAllStats } from '../../components/PokemonAllStats/PokemonAllStats';
 
 export const PokemonDetail = (props) => {
   const params = useParams();
@@ -40,7 +40,7 @@ export const PokemonDetail = (props) => {
       {pokemonSelected && <Card pokemon={pokemonSelected} />}
       <h3>Base Stats</h3>
 
-      <PokemonStatInfo stats={baseStats} color={color}/>
+      <PokemonAllStats stats={baseStats} color={color}/>
 
       <h5 className="baseStatLabel">Total</h5>
     </div>
