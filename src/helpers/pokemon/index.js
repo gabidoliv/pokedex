@@ -1,4 +1,4 @@
-import { POKEMON_COLOR_PER_TYPE } from "../../constants/pokemon";
+import { POKEMON_COLOR_PER_TYPE } from '../../constants/pokemon';
 
 export const parseIdIntoPokedexNumber = (id) =>
   `#${id.toString().padStart(3, '0')}`;
@@ -27,22 +27,50 @@ export const calculateMinOtherStats = (base) => {
   return calculateOtherStats(base, 0, 0, 0.9);
 };
 
+export const calculateMinStats = (base, statType) => {
+  if (statType === 'hp') return calculateMinHp(base);
+  return calculateMinOtherStats(base);
+};
+
+export const calculateMaxStats = (base, statType) => {
+  if (statType === 'hp') return calculateMaxHp(base);
+  return calculateMaxOtherStats(base);
+};
+
 export const parseStats = (stats) => {
   const translateStatToCamelCase = {
-    hp: 'hp',
-    attack: 'attack',
-    defense: 'defense',
-    'special-attack': 'specialAttack',
-    'special-defense': 'specialDefense',
-    speed: 'speed',
+    hp: {
+      statType: 'hp',
+      displayName: 'HP',
+    },
+    attack: {
+      statType: 'attack',
+      displayName: 'Attack',
+    },
+    defense: {
+      statType: 'defense',
+      displayName: 'Defense',
+    },
+    'special-attack': {
+      statType: 'specialAttack',
+      displayName: 'Special Attack',
+    },
+    'special-defense': {
+      statType: 'specialDefense',
+      displayName: 'Special Defense',
+    },
+    speed: {
+      statType: 'speed',
+      displayName: 'Speed',
+    },
   };
 
   return stats.reduce((acc, cur) => {
-    const { base_stat, stat } = cur;
+    const { base_stat: baseStat, stat } = cur;
 
-    const statName = translateStatToCamelCase[stat.name];
+    const { statType, displayName } = translateStatToCamelCase[stat.name];
 
-    return { ...acc, [statName]: base_stat };
+    return { ...acc, [statType]: { baseStat, displayName } };
   }, {});
 };
 
