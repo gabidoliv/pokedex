@@ -84,3 +84,12 @@ export const getPokemonColorByType = (types) => {
 
   return color;
 };
+
+export const insertStatTypeOnStats = (stats) => {
+  const keys = Object.keys(stats);
+  
+  return keys.map((key) => ({
+    ...stats[key],
+    statType: key,
+  }));
+};
