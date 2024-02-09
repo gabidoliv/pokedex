@@ -1,35 +1,20 @@
-import {
-  calculateMaxHp,
-  calculateMaxOtherStats,
-  calculateMaxStats,
-  calculateMinHp,
-  calculateMinOtherStats,
-  calculateMinStats,
-} from '../../helpers/pokemon';
+import { insertStatTypeOnStats } from '../../helpers/pokemon';
+import { PokemonStatInfo } from '../PokemonStatInfo/PokemonStatInfo';
 
 export const PokemonAllStats = (props) => {
   const { stats, color } = props;
-  const keys = Object.keys(stats);
-  const statValues = keys.map((key) => ({
-    ...stats[key],
-    statType: key,
-  }));
+  const parsedStats = insertStatTypeOnStats(stats);
 
   return (
     <div>
-      {statValues.map(({ statType, displayName, baseStat }) => (
-        <div key={statType}>
-          <h5 className="baseStatLabel">{displayName}</h5>
-          <h5 className="baseStatLabel">{baseStat}</h5>
-          <progress
-            style={{ '--color': color }}
-            className="stats"
-            value={baseStat}
-            max={calculateMaxStats(baseStat, statType)}
-          />
-          <h5 className="baseStatLabel">{calculateMinStats(baseStat, statType)}</h5>
-          <h5 className="baseStatLabel">{calculateMaxStats(baseStat, statType)}</h5>
-        </div>
+      {parsedStats.map(({ statType, displayName, baseStat }) => (
+        <PokemonStatInfo
+          key={statType}
+          statType={statType}
+          displayName={displayName}
+          baseStat={baseStat}
+          color={color}
+        />
       ))}
     </div>
   );
