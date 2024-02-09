@@ -20,4 +20,18 @@
 
 .baseStatLabel {
   display: inline;
+  margin: 4px;
+}
+
+.pokemonStatInfoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.rightContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
 }

@@ -4,7 +4,7 @@ export const parseIdIntoPokedexNumber = (id) =>
   `#${id.toString().padStart(3, '0')}`;
 
 const calculateHp = (base, ev, iv) => {
-  return base * 2 + 10 + ev + iv + 100;
+  return Math.floor(base * 2 + 10 + ev + iv + 100);
 };
 
 export const calculateMaxHp = (base) => {
@@ -16,7 +16,7 @@ export const calculateMinHp = (base) => {
 };
 
 const calculateOtherStats = (base, ev, iv, nature) => {
-  return (base * 2 + 5 + ev + iv) * nature;
+  return Math.floor((base * 2 + 5 + ev + iv) * nature);
 };
 
 export const calculateMaxOtherStats = (base) => {
