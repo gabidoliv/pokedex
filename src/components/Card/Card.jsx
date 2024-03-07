@@ -1,4 +1,3 @@
-import { POKEMON_COLOR_PER_TYPE } from "../../constants/pokemon";
 import { getPokemonColorByType, parseIdIntoPokedexNumber } from "../../helpers/pokemon";
 import { toCapitalLetter } from "../../helpers/string";
 import { Tag } from "../Tag/Tag";

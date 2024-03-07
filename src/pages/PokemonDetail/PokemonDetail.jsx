@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card } from '../../components/Card/Card';
-import {
-  calculateMaxHp,
-  calculateMaxOtherStats,
-  calculateMinHp,
-  calculateMinOtherStats,
-  getPokemonColorByType,
-  parseStats,
-} from '../../helpers/pokemon';
+import { getPokemonColorByType, parseStats } from '../../helpers/pokemon';
 import { PokemonAllStats } from '../../components/PokemonAllStats/PokemonAllStats';
+import { PokemonDetailTabs } from '../../components/PokemonDetailTabs/PokemonDetailTabs';
 
 export const PokemonDetail = (props) => {
   const params = useParams();
@@ -32,17 +26,13 @@ export const PokemonDetail = (props) => {
   if (!pokemonSelected) return <></>;
 
   const baseStats = parseStats(pokemonSelected.stats);
-
-  const color = getPokemonColorByType(pokemonSelected.types);
+  const color = pokemonSelected ? getPokemonColorByType(pokemonSelected.types) : null;
 
   return (
     <div>
-      {pokemonSelected && <Card pokemon={pokemonSelected} />}
-      <h3>Base Stats</h3>
-
-      <PokemonAllStats stats={baseStats} color={color}/>
-
-      <h5 className="baseStatLabel">Total</h5>
+      < PokemonDetailTabs label="About" pokemon={pokemonSelected} />
+      < PokemonDetailTabs label="Stats" pokemon={pokemonSelected} stats={baseStats} color={color} />
+      < PokemonDetailTabs label="Evolutions" pokemon={pokemonSelected} />
     </div>
   );
 };
