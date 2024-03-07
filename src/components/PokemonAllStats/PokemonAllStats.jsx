@@ -1,15 +1,19 @@
-import { getPokemonColorByType, insertStatTypeOnStats } from '../../helpers/pokemon';
+import {
+  getPokemonColorByType,
+  insertStatTypeOnStats,
+} from '../../helpers/pokemon';
 import { PokemonStatInfo } from '../PokemonStatInfo/PokemonStatInfo';
 
 export const PokemonAllStats = (props) => {
-  const { stats, color } = props;
-  const parsedStats = insertStatTypeOnStats(stats);
+  const { pokemon } = props;
 
-
+  const baseStats = parseStats(pokemon.stats);
+  const parsedStats = insertStatTypeOnStats(baseStats);
+  const color = pokemon ? getPokemonColorByType(pokemon.types) : null;
 
   return (
     <div>
-      <h3 style={{color: color}}>Base Stats</h3>
+      <h3 style={{ color: color }}>Base Stats</h3>
       {parsedStats.map(({ statType, displayName, baseStat }) => (
         <PokemonStatInfo
           key={statType}
@@ -19,7 +23,7 @@ export const PokemonAllStats = (props) => {
           color={color}
         />
       ))}
-            <h5 className="baseStatLabel">Total</h5>
+      <h5 className="baseStatLabel">Total</h5>
     </div>
   );
 };
