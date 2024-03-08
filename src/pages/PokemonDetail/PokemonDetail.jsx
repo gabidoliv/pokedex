@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card } from '../../components/Card/Card';
-import {
-  calculateMaxHp,
-  calculateMaxOtherStats,
-  calculateMinHp,
-  calculateMinOtherStats,
-  getPokemonColorByType,
-  parseStats,
-} from '../../helpers/pokemon';
+import { getPokemonColorByType, parseStats } from '../../helpers/pokemon';
 import { PokemonAllStats } from '../../components/PokemonAllStats/PokemonAllStats';
+import { Tabs } from '../../components/Tabs/Tabs';
 
 export const PokemonDetail = (props) => {
   const params = useParams();
@@ -31,18 +25,26 @@ export const PokemonDetail = (props) => {
 
   if (!pokemonSelected) return <></>;
 
-  const baseStats = parseStats(pokemonSelected.stats);
-
-  const color = getPokemonColorByType(pokemonSelected.types);
-
   return (
     <div>
-      {pokemonSelected && <Card pokemon={pokemonSelected} />}
-      <h3>Base Stats</h3>
+      <Card pokemon={pokemonSelected} />
 
-      <PokemonAllStats stats={baseStats} color={color}/>
-
-      <h5 className="baseStatLabel">Total</h5>
+      <Tabs
+        tabItems={[
+          {
+            title: 'About',
+            content: <h1>About</h1>,
+          },
+          {
+            title: 'Stats',
+            content: <PokemonAllStats pokemon={pokemonSelected} />,
+          },
+          {
+            title: 'Evolution',
+            content: <h1>Evolution</h1>,
+          },
+        ]}
+      />
     </div>
   );
 };
