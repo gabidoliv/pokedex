@@ -1,6 +1,9 @@
-import { getPokemonColorByType, parseIdIntoPokedexNumber } from "../../helpers/pokemon";
-import { toCapitalLetter } from "../../helpers/string";
-import { Tag } from "../Tag/Tag";
+import {
+  getPokemonColorByType,
+  parseIdIntoPokedexNumber,
+} from '../../helpers/pokemon';
+import { toCapitalLetter } from '../../helpers/string';
+import { Tag } from '../Tag/Tag';
 
 export const Card = (props) => {
   const { pokemon } = props;
@@ -11,9 +14,9 @@ export const Card = (props) => {
     <div
       style={{
         backgroundColor: color,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         padding: 16,
         marginBottom: 16,
         borderRadius: 15,
@@ -24,8 +27,8 @@ export const Card = (props) => {
         <h2>{toCapitalLetter(pokemon.name)}</h2>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
+            display: 'flex',
+            justifyContent: 'start',
           }}
         >
           {pokemon.types.map(({ type }) => (

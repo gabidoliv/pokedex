@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Card } from '../Card/Card';
-import { PokemonAllStats } from '../PokemonAllStats/PokemonAllStats';
 
 export const Tabs = (props) => {
-  const { foo } = props;
+  const { tabItems } = props;
 
-  const [selectedTab, setTab] = useState();
+  const [selectedTab, setTab] = useState(0);
 
   const handleChange = (newTab) => {
     setTab(newTab);
@@ -13,13 +11,12 @@ export const Tabs = (props) => {
 
   return (
     <div>
-      {foo.map((tab, index) => (
-        <div>
-          <button onClick={() => handleChange(index)}>{foo.title}</button>
-
-          {selectedTab===index && tab.content}
-        </div>
-      ))}
+      <div>
+        {tabItems.map((tab, index) => (
+          <button onClick={() => handleChange(index)}>{tab.title}</button>
+        ))}
+      </div>
+      {tabItems.map((tab, index) => selectedTab === index && tab.content)}
     </div>
   );
 };

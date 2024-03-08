@@ -1,6 +1,7 @@
 import {
   getPokemonColorByType,
   insertStatTypeOnStats,
+  parseStats,
 } from '../../helpers/pokemon';
 import { PokemonStatInfo } from '../PokemonStatInfo/PokemonStatInfo';
 
